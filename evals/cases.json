@@ -1,0 +1,22 @@
+{
+    "turn_on_dining_room_light": {
+        "inputs": ["dining room light on", "打开餐厅灯"],
+        "expected_tools": ["intent__HassTurnOn"]
+    },
+    "turn_off_living_room_light": {
+        "inputs": ["living room light off", "客厅灯关掉"],
+        "expected_tools": ["intent__HassTurnOff"]
+    },
+    "set_light_brightness": {
+        "inputs": ["餐厅灯50%亮度"],
+        "expected_tools": ["light__HassLightSet"]
+    },
+    "no_tool_call": {
+        "inputs": ["hello", "讲个笑话"],
+        "expected_tools": []
+    },
+    "get_ha_entity_live_context": {
+        "inputs": ["餐厅灯开着吗"],
+        "expected_tools": ["homeassistant__GetLiveContext"]
+    }
+}
