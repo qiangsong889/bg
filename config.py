@@ -7,21 +7,22 @@ HA_PROMPT_NAME = 'Device control'
 DB_PATH = Path(__file__).resolve().parent / "data" / "bg.db"
 LOG_PATH = Path(__file__).resolve().parent / "data" / "bg.log"
 SNAPSHOT_DIR = (
-    Path(__file__).resolve().parent.parent
+    Path(__file__).resolve().parent
     / "data" / "snapshots"
 )
 
 EVALS_DIR = (
     Path(__file__).resolve().parent
+    / "evals"
 )
 
 EVAL_RUNS_DIR = (
-    Path(__file__).resolve().parent.parent
+    Path(__file__).resolve().parent
     / "data" / "eval_runs"
 )
 
 SNAPSHOTS_PATH = (
-    Path(__file__).resolve().parent.parent
+    Path(__file__).resolve().parent
     / "data" / "snapshots"
 )
 

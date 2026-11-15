@@ -12,6 +12,7 @@ from typing import Any
 from prompt import SYSTEM_PROMPT
 from contextlib import contextmanager
 from config import SNAPSHOT_DIR, EVALS_DIR, EVAL_RUNS_DIR
+from dotenv import load_dotenv
 
 SERVERS = ['ha']
 DIRS = [SNAPSHOT_DIR, EVAL_RUNS_DIR]
@@ -152,4 +153,5 @@ async def main():
     print(f"结果已保存: {save_file_path}")
 
 if __name__ == "__main__":
+    load_dotenv()
     asyncio.run(main())
