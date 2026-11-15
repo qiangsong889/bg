@@ -1,4 +1,4 @@
-from ha import ha_client    
+from ha import create_ha_client    
 from langchain_core.tools import tool
 from datetime import datetime
 from logger import logger
@@ -23,6 +23,7 @@ async def get_tools() -> list:
 
 async def get_ha_tools() -> list:
     try:
+        ha_client = create_ha_client()
         ha_tools = await asyncio.wait_for(ha_client.get_tools(), 5)
         logger.info('HA tools loaded SUCCESSFULLY')
         print(f"HA TOOLS LOADED SUCCESSFULLY")

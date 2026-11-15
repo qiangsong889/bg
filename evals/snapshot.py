@@ -4,9 +4,8 @@ import json
 from datetime import datetime
 from pathlib import Path
 import asyncio
+from config import SNAPSHOTS_PATH
 
-
-SNAPSHOTS_PATH = Path(__file__).resolve().parent.parent / "data" / "snapshots"
 
 def serialize_tool(tool):
     schema = tool.tool_call_schema

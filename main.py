@@ -21,11 +21,8 @@ import asyncio
 from tools import get_tools
 from prompt import get_prompts
 from logger import logger
-load_dotenv()
+from config import DB_PATH, MODEL_NAME, MODEL_TIMEOUT
 
-
-path = Path(__file__).parent / "graph.png"
-DB_PATH = Path(__file__).resolve().parent / "data" / "bg.db"
 DB_PATH.parent.mkdir(parents=True, exist_ok=True)
 
 def route(state: MessagesState) -> str:
@@ -73,7 +70,7 @@ async def main():
         print(f"BG is starting...")
         tools = await get_tools()
         prompts = await get_prompts()
-        model = ChatAnthropic(model="claude-haiku-5-5", timeout=10)
+        model = ChatAnthropic(model=MODEL_NAME, timeout=MODEL_TIMEOUT)
 
         async with AsyncSqliteSaver.from_conn_string(str(DB_PATH)) as saver:
             app = build_app(tools, prompts, model, saver)
@@ -135,5 +132,6 @@ async def main():
     
     
 if __name__ == "__main__":
+    load_dotenv()
     asyncio.run(main())
         

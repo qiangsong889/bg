@@ -11,21 +11,9 @@ from main import build_app, get_prompts
 from typing import Any
 from prompt import SYSTEM_PROMPT
 from contextlib import contextmanager
+from config import SNAPSHOT_DIR, EVALS_DIR, EVAL_RUNS_DIR
 
 SERVERS = ['ha']
-SNAPSHOT_DIR = (
-    Path(__file__).resolve().parent.parent
-    / "data" / "snapshots"
-)
-
-EVALS_DIR = (
-    Path(__file__).resolve().parent
-)
-
-EVAL_RUNS_DIR = (
-    Path(__file__).resolve().parent.parent
-    / "data" / "eval_runs"
-)
 DIRS = [SNAPSHOT_DIR, EVAL_RUNS_DIR]
 for d in DIRS:
     d.mkdir(parents=True, exist_ok=True)
