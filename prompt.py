@@ -1,8 +1,9 @@
 from ha import create_ha_client
-from logger import logger 
 import asyncio 
 from config import HA_PROMPT_NAME, HA_CONN_TIMEOUT
+import logging
 
+logger = logging.getLogger('bg')
 SYSTEM_PROMPT = """
 你的名字是BG. 你是一个home agent
 ### 语言与术语输出规范 (Language & Terminology Guidelines)

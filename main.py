@@ -20,10 +20,12 @@ import os
 import asyncio
 from tools import get_tools
 from prompt import get_prompts
-from logger import logger
+from logger import register_agent_logger
 from config import DB_PATH, MODEL_NAME, MODEL_TIMEOUT
+import logging
 
 DB_PATH.parent.mkdir(parents=True, exist_ok=True)
+logger = logging.getLogger('bg')
 
 def route(state: MessagesState) -> str:
     if state["messages"][-1].tool_calls:
@@ -44,6 +46,8 @@ def build_app(tools, prompts, model, checkpointer):
         for call in ans.tool_calls:
             # print(f"[调用工具] {call['name']}")
             logger.info(f"[调用工具]: {call['name']} [参数]: {call['args']}")
+        if ans.text:
+            logger.info(f"{ans.text}")
         return { "messages": [ans] } 
 
     graph = StateGraph(MessagesState)
@@ -133,5 +137,6 @@ async def main():
     
 if __name__ == "__main__":
     load_dotenv()
+    register_agent_logger()
     asyncio.run(main())
         

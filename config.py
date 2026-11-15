@@ -7,6 +7,7 @@ HA_CONN_TIMEOUT = 5
 
 DB_PATH = Path(__file__).resolve().parent / "data" / "bg.db"
 LOG_PATH = Path(__file__).resolve().parent / "data" / "bg.log"
+
 SNAPSHOTS_DIR = (
     Path(__file__).resolve().parent
     / "data" / "snapshots"
@@ -22,8 +23,4 @@ EVAL_RUNS_DIR = (
     / "data" / "eval_runs"
 )
 
-SNAPSHOTS_PATH = (
-    Path(__file__).resolve().parent
-    / "data" / "snapshots"
-)
 

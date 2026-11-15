@@ -1,8 +1,8 @@
 from langchain_mcp_adapters.client import MultiServerMCPClient
 import os
-from dotenv import load_dotenv
-from logger import logger
+import logging
 
+logger = logging.getLogger('bg')
 def create_ha_client() -> MultiServerMCPClient:
     try:
         ha_client = MultiServerMCPClient({

@@ -1,15 +1,16 @@
 from ha import create_ha_client    
 from langchain_core.tools import tool
 from datetime import datetime
-from logger import logger
 import asyncio
 from config import HA_CONN_TIMEOUT
+import logging
 # @tool
 # def get_current_time() -> str:
 #     """获取当前的本地日期和时间"""
 #     # raise RuntimeError("时间无法获取")
 #     return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
+logger = logging.getLogger('bg')
 async def get_tools() -> list:
     tools: list = []
     try:
