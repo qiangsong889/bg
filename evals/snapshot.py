@@ -4,8 +4,8 @@ import json
 from datetime import datetime
 from pathlib import Path
 import asyncio
-from config import SNAPSHOTS_PATH
-
+from config import SNAPSHOTS_DIR
+from dotenv import load_dotenv
 
 def serialize_tool(tool):
     schema = tool.tool_call_schema
@@ -31,7 +31,7 @@ async def save_ha_snapshot():
         "prompt": prompt,
         "tools": [serialize_tool(tool) for tool in tools],
     }
-    ha_snapshot_path = SNAPSHOTS_PATH / "ha.json"
+    ha_snapshot_path = SNAPSHOTS_DIR / "ha.json"
     
     with open(ha_snapshot_path, "w", encoding="utf-8") as f:
         json.dump(snapshot, f, ensure_ascii=False, indent=2)
@@ -41,4 +41,5 @@ async def main():
     await save_ha_snapshot()
     
 if __name__ == "__main__":
+    load_dotenv()
     asyncio.run(main())

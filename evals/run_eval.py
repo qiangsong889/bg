@@ -11,11 +11,11 @@ from main import build_app, get_prompts
 from typing import Any
 from prompt import SYSTEM_PROMPT
 from contextlib import contextmanager
-from config import SNAPSHOT_DIR, EVALS_DIR, EVAL_RUNS_DIR
+from config import SNAPSHOTS_DIR, EVALS_DIR, EVAL_RUNS_DIR, MODEL_NAME
 from dotenv import load_dotenv
 
 SERVERS = ['ha']
-DIRS = [SNAPSHOT_DIR, EVAL_RUNS_DIR]
+DIRS = [SNAPSHOTS_DIR, EVAL_RUNS_DIR]
 for d in DIRS:
     d.mkdir(parents=True, exist_ok=True)
 
@@ -38,7 +38,7 @@ FAKE_FUNC_RETURN_VALUE = {
 def get_snap_shots() -> dict[str, Any]:
     snapshots = {}
     for name in SERVERS:
-        path = SNAPSHOT_DIR / f"{name}.json"
+        path = SNAPSHOTS_DIR / f"{name}.json"
         with path.open(encoding="utf-8") as f:
             snapshots[name] = json.load(f)
             
@@ -82,13 +82,12 @@ def generate_from_snapshots(snapshots) -> tuple[list[StructuredTool], str, dict[
 async def main():
     tools, prompts, servers = generate_from_snapshots(get_snap_shots())
     cases = get_cases()
-    model_name="claude-haiku-5-5"
-    model = ChatAnthropic(model=model_name)
+    model = ChatAnthropic(model=MODEL_NAME)
     app = build_app(tools, prompts, model, None)
     record = {
         "run": {
             "started_at": datetime.now().strftime("%Y-%m-%dT%H-%M-%S"),
-            "model": model_name,
+            "model": MODEL_NAME,
             "snapshots": servers,
         },
         "summary": {

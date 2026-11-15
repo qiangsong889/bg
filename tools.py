@@ -3,6 +3,7 @@ from langchain_core.tools import tool
 from datetime import datetime
 from logger import logger
 import asyncio
+from config import HA_CONN_TIMEOUT
 # @tool
 # def get_current_time() -> str:
 #     """获取当前的本地日期和时间"""
@@ -24,7 +25,7 @@ async def get_tools() -> list:
 async def get_ha_tools() -> list:
     try:
         ha_client = create_ha_client()
-        ha_tools = await asyncio.wait_for(ha_client.get_tools(), 5)
+        ha_tools = await asyncio.wait_for(ha_client.get_tools(), HA_CONN_TIMEOUT)
         logger.info('HA tools loaded SUCCESSFULLY')
         print(f"HA TOOLS LOADED SUCCESSFULLY")
         return ha_tools

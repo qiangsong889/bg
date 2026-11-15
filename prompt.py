@@ -1,7 +1,7 @@
 from ha import create_ha_client
 from logger import logger 
 import asyncio 
-from config import HA_PROMPT_NAME
+from config import HA_PROMPT_NAME, HA_CONN_TIMEOUT
 
 SYSTEM_PROMPT = """
 你的名字是BG. 你是一个home agent
@@ -26,7 +26,7 @@ async def get_ha_prompt() -> str:
     ha_prompt = ""
     try:
         ha_client = create_ha_client()
-        msgs = await asyncio.wait_for(ha_client.get_prompt("ha", HA_PROMPT_NAME), 5)  # 返回一个消息列表，这里只有 1 条
+        msgs = await asyncio.wait_for(ha_client.get_prompt("ha", HA_PROMPT_NAME), HA_CONN_TIMEOUT)  # 返回一个消息列表，这里只有 1 条
         ha_prompt = msgs[0].text
         logger.info("HA prompt loaded SUCCESSFULLY")
         print("HA prompt loaded SUCCESSFULLY")
