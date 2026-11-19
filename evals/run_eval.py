@@ -7,7 +7,7 @@ import asyncio
 import json
 from pathlib import Path
 from datetime import datetime
-from main import build_app, get_prompts
+from graph import build_app
 from typing import Any
 from prompt import SYSTEM_PROMPT
 from contextlib import contextmanager

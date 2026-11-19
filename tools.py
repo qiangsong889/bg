@@ -4,6 +4,8 @@ from datetime import datetime
 import asyncio
 from config import HA_CONN_TIMEOUT
 import logging
+from memory import remember
+
 # @tool
 # def get_current_time() -> str:
 #     """获取当前的本地日期和时间"""
@@ -12,7 +14,7 @@ import logging
 
 logger = logging.getLogger('bg')
 async def get_tools() -> list:
-    tools: list = []
+    tools: list = [remember]
     try:
         ha_tools = await get_ha_tools()
         

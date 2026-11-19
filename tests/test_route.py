@@ -1,4 +1,4 @@
-from main import route
+from graph import _route
 from langgraph.graph import StateGraph, MessagesState, START, END
 from langchain_core.messages import AIMessage, HumanMessage, SystemMessage, ToolMessage, AIMessageChunk
 from tools import get_tools
@@ -9,7 +9,7 @@ def test_route_end():
     state = MessagesState({
         "messages": [AIMessage(content="Done")]
     })
-    assert route(state) == END
+    assert _route(state) == END
     
 def test_route_tools_node():
     state = MessagesState({
@@ -17,5 +17,5 @@ def test_route_tools_node():
             content="",
             tool_calls=[{ "name": "example_tool", "args": {}, "id": "123" }])]
     })
-    assert route(state) == "tools_node"
+    assert _route(state) == "tools_node"
     
